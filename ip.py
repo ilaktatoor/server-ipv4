@@ -9,10 +9,10 @@ import urllib.request
 
 from requests.models import requote_uri
 
-EMAIL_ADDRES="servermckali@gmail.com"
-EMAIL_PASSWORD="emma1200"
-EMAIL_TO=['cristobalschmidt001@gmail.com','yamilyaber@hotmail.com','cemmnuelaxa@gmail.com']
-
+EMAIL_ADDRES=""
+EMAIL_PASSWORD=""
+EMAIL_TO=[]
+old_ip=''#DONT FILL THIS ONE
 
 def connect(host='http://google.com'):
     try:
@@ -22,15 +22,17 @@ def connect(host='http://google.com'):
         return False
 
 
-def request():
+def request(host1='https://api.ipify.org'):
     try:
-        ping =  get('https://api.ipify.org').text
+        urllib.request.urlopen(host1)
         return True
     except:
         return False
 
 while True:
-    time.sleep(10)
+
+    time.sleep(10)#every 10 secs will check the internet status
+
     if connect()==False:
         print('not connected')
     else:
@@ -39,7 +41,7 @@ while True:
         
         if request() == True:
             ip =  get('https://api.ipify.org').text
-            old_ip = ''
+            
             if old_ip != ip:
                 old_ip = ip
                 time.sleep(120)#time in seconds
